@@ -1,0 +1,131 @@
+package atm;
+import java.util.Scanner;
+import java.util.function.Predicate;
+
+public class Operations extends Main {
+			customerDetails obj1;
+			Scanner sc=new Scanner(System.in);
+			public AtmOperations() {
+			    System.out.println("1.Balance enquiry");
+			    System.out.println("2.cash withdrawl");
+			    System.out.println("3.cash Transfer");
+			    System.out.println("4.account balance");
+			    System.out.println("5.Amount Deposit");
+			    int choice=sc.nextInt();
+			    switch(choice) {
+			    case 1:
+			    	balanceenquiry();
+			    	break;
+			    case 2:
+			    	withdrawcash();
+			    	break;
+			    case 3:
+			    	transfercash();
+			    	break;
+			    case 4:
+			    	accountbalance();
+			    	break;
+			    case 5:
+			    	DepositAmount();
+			    	break;
+			    }
+			}
+			void balanceenquiry() {
+				System.out.println("Enter 4 digit Pin");
+				int pin=sc.nextInt();
+				for(customerDetails customerdeatail: detail)  
+				{  
+				if(customerdeatail.getsPin()==pin){
+					System.out.println(customerdeatail.getBalance());  
+				
+				}  
+				}  	
+			}
+			void withdrawcash() {
+				System.out.println("Enter 4 digit Pin");
+				int pin=sc.nextInt();
+				for(customerDetails customerdeatail: detail)  
+				{  
+				if(customerdeatail.getsPin()==pin){
+					obj1=customerdeatail;
+					int amt;
+					int flag=1;
+				    do {
+				     System.out.println("Enter Amount Multiples by 100 and less than 10000:");
+					 amt=sc.nextInt();
+					 if(amt>=100&&amt<=10000 && amt%100==0) {
+						 flag=0;
+					 }
+				    }while(flag!=0);
+					int _2000count=0,_500count=0,_100count=0;
+					int amt_copy=amt;
+					while(amt>=100)
+					{	if(amt>=2000) {
+							_2000count++;
+							amt-=2000;
+						}
+						else if(amt>=500&&amt<2000) {
+							_500count++;
+							amt-=500;
+						}
+						else if(amt>=100&&amt<500) {
+					            _100count++;
+					            amt-=100;
+						}
+				   }
+			customerdeatail.customercashupdate(obj1,amt_copy, _2000count,_500count ,_100count);	 
+				}		   
+				}  	
+			}
+			void transfercash() {
+				System.out.println("Enter pin");
+				int pin=sc.nextInt();
+				for(customerDetails customerdetail: detail)  
+				{  
+				if(customerdetail.getsPin()==pin){
+					customerDetails obj1=customerdetail;
+					 moneyupdate(obj1);
+				}
+				}  		
+			}
+			void  moneyupdate(customerDetails obj) {
+				System.out.println("Enter Account Holder Name:");
+				String s=sc.next();
+				System.out.println("Enter account number to transfer:");
+				int accno=sc.nextInt();
+				for(customerDetails customerdetail1: detail)  
+				{  
+				if(customerdeatail1.getAccNo()==accno){
+				int amt;
+			    do {
+			     System.out.println("Enter Amount less than 10000:");
+				 amt=sc.nextInt();
+			    }while(amt>10000);
+			    
+			    if(obj.balance>=amt) {
+			    	obj.balance-=amt;
+			    	customerdeatail1.balance+=amt;
+			    	System.out.println("Amount transfered successfully!");
+			    }
+				}
+				}
+			}
+			void accbalance() {
+				displayatmdenomenation();		
+			}
+			void DepositAmount() {
+				System.out.println("Enter pin");
+				int pin=sc.nextInt();
+				for(customerDetails customerdeatail: detail)  
+				{  
+				if(customerdeatail.getsPin()==pin){
+					System.out.println("Enter Amount to Deposit:");
+					int amount=sc.nextInt();
+					customerdeatail.balance+=amount;
+				}
+				}  		
+			}
+			
+
+		}
+}

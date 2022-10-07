@@ -1,0 +1,62 @@
+package atm;
+import java.text.DateFormat.Field;
+ class Customerdetails extends Main {
+		int accNo;
+		String AccName;
+		int Pin;
+		int Balance;
+		public void customerDetails(int accNo, String AccName, int Pin, int Balance) {
+			super();
+			this.accNo = accNo;
+			this.AccName = AccName;
+			this.Pin = Pin;
+			this.Balance = Balance;
+		}
+		public int getAccNo() {
+			return accNo;
+		}
+		public void setAccNo(int accNo) {
+			this.accNo = accNo;
+		}
+		public String getAccName() {
+			return AccName;
+		}
+		public void setAccName(String AccName) {
+			this.AccName = AccName;
+		}
+		public int getPin() {
+			return Pin;
+		}
+		public void setPin(int Pin) {
+			this.Pin = Pin;
+		}
+		public int getBalance() {
+			return Balance;
+		}
+		public void setBalance(int Balance) {
+			this.Balance = Balance;
+		}
+		public void updateBalance(int amt) {
+			Balance-=amt;
+			return;
+		}
+		void customercashupdate(customerDetails obj,int amt,int _2000count,int _500count,int _100count) {
+			if(amt<=obj.Balance) {
+	    		if(a12.update_withdrawl(amt,_2000count,_500count,_100count)) {
+	    		  obj.updatebalaance(amt);
+	    		} 
+	    		else {
+	    			System.out.println("Sorry insufficient account balance");
+	    		}
+	    	}
+	    	else {
+	    		System.out.println("Sorry insufficient balance");
+	    	}
+			return;
+		}
+		public String toString() {
+			return  accNo + AccName + Pin + Balance;
+		}	
+	}
+
+
